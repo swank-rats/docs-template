@@ -42,8 +42,19 @@ body {
     padding-right: 6rem;
     margin-left: auto;
     margin-right: auto;
-    max-width: 42rem;
+    max-width: 45em;
     display: block;
+}
+
+#TOC {
+    width: 10em;
+    float: left;
+}
+
+#wrapper {
+    margin-left: 10em;
+    padding: 0 1em;
+    min-width: 16em;
 }
 
 h1, h2, h3, dt {
