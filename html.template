@@ -44,27 +44,32 @@ $endif$
 
 <h1 class="title">$title$</h1>
 
-
+<ul>
 $for(author)$
-<h2 class="author">$author.name$</h2>
-<p class="affilation"><em>$author.affiliation$</em></p>
+<li>$author.name$ <em>&lt;$author.email$&gt;</em></li>
 $endfor$
+</ul>
+<section id="abstract" role="abstract">
+$if(abstract)$
+
+<b>Abstract</b>
+<p><em>$abstract$</em></p>
+
+$endif$
+</section>
 
 </header>
+
+<hr/>
 $endif$
+
 $if(toc)$
 <nav id="$idprefix$TOC">
 $toc$
 </nav>
 $endif$
+
 <div id="wrapper">
-<section id="abstract" role="abstract">
-$if(abstract)$
-
-<p class="small"><strong>Abstract: </strong><em>$abstract$</em></p>
-
-$endif$
-</section>
 
 
 <section id="content" role="content">
