@@ -1,6 +1,196 @@
-\documentclass[11pt,article,oneside]{memoir}
-\usepackage[minion]{org-preamble-pdflatex}
-\input{vc}
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Default Settings
+
+\newcommand{\mypapersize}{A4}
+% e.g., "A4", "letter", "legal", "executive", ...
+% The size of the paper of the resulting PDF file.
+
+\newcommand{\mytype}{true}
+% e.g. true=print, false=screen
+% optimize output for this type
+
+\newcommand{\mylaterality}{twoside}
+% "oneside" or "twoside"
+% Either you are creating a document which is printed on both, left pages
+% and right pages (twoside) or you create a document which is printed
+% on right pages only (oneside).
+
+\newcommand{\mydraft}{false}
+% "true" or "false"
+% Use draft mode? If true, included graphics are replaced by empty
+% rectangles (of same size) and overfull boxes (in margin space) are
+% marked with black box (-> easy to spot!)
+
+\newcommand{\myparskip}{half}
+% e.g., "no", "full", "half", ...
+% How to separate paragraphs: indention ("no") or spacing ("half",
+% "full", ...).
+
+\newcommand{\myBCOR}{0mm}
+% Inner binding correction. This value depends on the method which is
+% being used to bind your printed result. Some techniques do not
+% require a binding correction at all ("0mm"), other require for
+% example "5mm". Refer to KOMA script documentation for a detailed
+% explanation what a binding correction is and how to measure it.
+
+\newcommand{\myfontsize}{12pt}
+% e.g., 10pt, 11pt, 12pt
+% The font size of the main text in pt (points).
+
+\newcommand{\mylinespread}{1.25}
+% e.g., 1.0, 1.5, 2.0
+% Line spacing in %/100. For example 1.5 means 150% of the usual line
+% spacing. Please use with caution: 100% ("1.0") is fine because the
+% font was designed for it.
+
+\newcommand{\mylanguage}{ngerman}
+% "english,ngerman", "ngerman,english", ...
+% NOTE: The *last* language is the active one!
+% See babel documentation for further details.
+
+\newcommand{\mytodonotesoptions}{}
+% e.g., "" (empty), "disable", ...
+% Options for the todonotes-package. If "disable", all todonotes will
+% be hidden (including listoftodos).
+
+\newcommand{\mytitlepage}{title/titlepage}
+% e.g. title/titlepage
+% define your titlepage
+
+\newcommand{\myleft}{2.5cm}
+\newcommand{\myright}{2.5cm}
+\newcommand{\mytop}{2.5cm}
+\newcommand{\mybottom}{2.5cm}
+% e.g. 1cm
+% define page borders, for twosided left != right, will be alternated every page
+
+% listings
+\newcommand{\mylstframe}{true}
+% e.g. true/false
+% frame around listings
+\newcommand{\mylstframeleftmargin}{1.5em}
+\newcommand{\mylstleftmargin}{2.0em}
+% e.g. 1.5em
+% margin for frame and code
+\newcommand{\mylstlanguage}{perl}
+% e.g. perl/c++/php ...
+% set default language
+
+\newcommand{\chapternumber}{0}
+% starting number of chapter
+
+\newcommand{\codelabelprefix}{code}
+\newcommand{\imglabelprefix}{img}
+\newcommand{\algolabelprefix}{algo}
+% label prefixes
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Override Settings
+
+% TODO settings overwrite
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Style
+
+% general style
+\documentclass[
+	fontsize=\myfontsize,	% size of the main text
+	paper=\mypapersize,  	% paper format
+	parskip=\myparskip,  	% vertical space between paragraphs (instead of indenting first par-line)
+	DIV=calc,           	% calculates a good DIV value for type area; 66 characters/line is great
+	headinclude=true,    	% is header part of margin space or part of page content?
+	footinclude=false,   	% is footer part of margin space or part of page content?
+	open=right,          	% "right" or "left": start new chapter on right or left page
+	appendixprefix=true, 	% adds appendix prefix; only for book-classes with \backmatter
+	bibliography=totoc,  	% adds the bibliography to table of contents (without number)
+	draft=\mydraft,      	% if true: included graphics are omitted and black boxes
+                     		% mark overfull boxes in margin space
+	BCOR=\myBCOR,        	% binding correction (depends on how you bind
+				            % the resulting printout.
+	\mylaterality,        	% oneside: document is not printed on left and right sides, only right side
+                     		% twoside: document is printed on left and right sides
+	scrpage2
+]{scrbook}
+
+\usepackage[
+  left=\myleft,
+  right=\myright,
+  top=\mytop,
+  bottom=\mybottom,
+  includeheadfoot
+]{geometry}
+\usepackage[automark,headsepline]{scrpage2}
+\deftripstyle{pagestyle}
+	[0mm]
+	[0.3mm]
+	{}				% top left
+  	{\leftmark}		% top center
+  	{}				% top right
+ 	{\pagemark}		% bottom left
+  	{}				% bottom center
+  	{ITM3}% bottom right
+
+\pagestyle{pagestyle}
+% use "pagestyle" also on chapter starting pages
+\renewcommand{\chapterpagestyle}{pagestyle}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Packages
+
+% basic
+\usepackage{color}
+
+% language
+\usepackage[utf8]{inputenc}	% utf8 input
+\usepackage[\mylanguage]{babel} % language
+\usepackage[T1]{fontenc}
+
+% structures
+\usepackage[\mytodonotesoptions]{todonotes} % todo command
+\usepackage{blindtext} % generating blindtext
+\usepackage{etoolbox}
+\usepackage{xparse}
+
+% captions
+\usepackage{caption}
+% for multiline captions
+\captionsetup{
+  format=plain,
+  justification=centering,
+  singlelinecheck=off
+}
+
+% bibtex
+\usepackage{cite}
+
+% hyperref
+\usepackage{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Document Attributes
+
+% TODO document attributes
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+% PDF Settings
+
+% TODO pdf settings
+
+
+%%%%%%%%%%%%%%
+%
+% Listings
+
+% TODO listings
 
 $if(listings)$
 \usepackage{listings}
@@ -17,6 +207,13 @@ $endif$
 $if(tables)$
 \usepackage{longtable}
 $endif$
+
+
+%%%%%%%%%%%%%%
+%
+% Graphicx
+
+% TODO graphicx
 
 $if(graphics)$
 \usepackage{graphicx}
@@ -35,28 +232,31 @@ $if(title)$
 \title{\bigskip \bigskip $title$}
 $endif$
 
-%\author{$for(author)$$author$$sep$\\$endfor$}
-
-\author{$for(author)$\Large $author.name$\vspace{0.05in} \newline\normalsize\emph{$author.affiliation$} \newline\footnotesize \url{$author.email$}\vspace*{0.2in}\newline $sep$ \and $endfor$}
-
-%\author{$for(author)$$author.name$ ($author.affiliation$)$sep$ \and $endfor$}
+\author{$for(author)$$author.name$ ($author.email$)$sep$ \and $endfor$}
 
 \date{}
 
 \begin{document}
-\setkeys{Gin}{width=1\textwidth}
-%\setromanfont[Mapping=tex-text,Numbers=OldStyle]{Minion Pro}
-%\setsansfont[Mapping=tex-text]{Minion Pro}
-%\setmonofont[Mapping=tex-text,Scale=0.8]{Pragmata}
-\chapterstyle{article-4}
-\pagestyle{kjh}
 
-\published{$date$. Incomplete Draft. Please do not cite without permission.}
+% setcounter for chapter
+\setcounter{chapter}{\chapternumber}
 
+% roman page numbers and such; only available in scrbook
+\frontmatter
+
+% include title page
 $if(title)$
 \maketitle
 $endif$
 
+% abstract
+$if(abstract)$
+\chapter{Abstract}
+\noindent $abstract$
+\newpage
+$endif$
+
+% table of contents
 $if(toc)$
 {
 \hypersetup{linkcolor=black}
@@ -65,18 +265,12 @@ $if(toc)$
 }
 $endif$
 
-$if(abstract)$
-
-\begin{abstract}
-
-\noindent $abstract$
-
-\end{abstract}
-
-$endif$
+% marks main part using arabic page numbers and such; only available in scrbook
+\mainmatter
 
 $body$
 
+% references
 $if(natbib)$
 $if(biblio-files)$
 $if(biblio-title)$
@@ -97,6 +291,6 @@ $if(biblatex)$
 $endif$
 $for(include-after)$
 $include-after$
-
 $endfor$
+
 \end{document}
