@@ -224,7 +224,7 @@ h1, h2, h3, h4 {
 }
 
 h1, h2, h3 {
-    border-bottom: 1px solid #e5e5e5
+    border-bottom: 1px solid #e5e5e5;
 }
 
 h1 {
@@ -233,7 +233,7 @@ h1 {
     font-size: 22px;
     font-weight: bold;
     counter-increment: counter-h1;
-    counter-reset: counter-h2
+    counter-reset: counter-h2;
 }
 
 h2 {
@@ -242,7 +242,7 @@ h2 {
     font-size: 19px;
     font-weight: bold;
     counter-increment: counter-h2;
-    counter-reset: counter-h3
+    counter-reset: counter-h3;
 }
 
 h3 {
@@ -251,7 +251,7 @@ h3 {
     font-size: 16px;
     font-weight: bold;
     counter-increment: counter-h3;
-    counter-reset: counter-h4
+    counter-reset: counter-h4;
 }
 
 h4 {
@@ -259,28 +259,28 @@ h4 {
     padding: 1.33em 0 0;
     font-size: 14px;
     font-weight: bold;
-    counter-increment: counter-h4
+    counter-increment: counter-h4;
 }
 
 h1:before, h2:before {
     display: inline-block;
-    min-width: 50px
+    min-width: 50px;
 }
 
 h1:before {
-    content: counter(counter-h1) " "
+    content: counter(counter-h1) " ";
 }
 
 h2:before {
-    content: counter(counter-h1) "." counter(counter-h2) " "
+    content: counter(counter-h1) "." counter(counter-h2) " ";
 }
 
 h3:before {
-    content: counter(counter-h1) "." counter(counter-h2) "." counter(counter-h3) " "
+    content: counter(counter-h1) "." counter(counter-h2) "." counter(counter-h3) " ";
 }
 
 h4:before {
-    content: counter(counter-h1) "." counter(counter-h2) "." counter(counter-h3) "." counter(counter-h4) " "
+    content: counter(counter-h1) "." counter(counter-h2) "." counter(counter-h3) "." counter(counter-h4) " ";
 }
 
 table {
